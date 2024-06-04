@@ -1,0 +1,48 @@
+{displayedtableData.length > 0 ?
+                    displayedtableData.map((item, index) => {
+                      return (
+                        <>
+                          <tr key={index}>
+                            <td>
+                              <span className="">
+                                <img src="/tick.svg" />
+                              </span>
+                            </td>
+                            <td>{item.createdAt}</td>
+                            <td>
+                              <Link className="link_table link_table2">
+                                {item.user_id}
+                              </Link>
+                            </td>
+                            <td>
+                              <div className="link_icon">
+                                <p>
+                                  <a href="#" className="link_table">
+                                    {item.user_wallet}{" "}
+                                    {/* Replace with actual data */}
+                                    <span className="files">
+                                      <i
+                                        className="fa fa-files-o"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </span>
+                                    <span className="linkIcon">
+                                      <i
+                                        className="fa fa-link"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </span>
+                                  </a>
+                                </p>
+                              </div>
+                            </td>
+                            <td>
+                              {((item.buyed_plan[0].amount -
+                                item.buyed_plan[0].amount * 0.15) /
+                                2).toFixed(2)}
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    }) :
+                     <h1 className="nodata_h">No data found!</h1>}

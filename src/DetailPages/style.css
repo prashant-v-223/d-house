@@ -1,0 +1,234 @@
+img.wallet_icon_last {
+    width: 36px;
+    background: #cb6100;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.table_td_two {
+    margin: 0;
+    font-size: 18px;
+    font-family: 'Plus Jakarta Sans';
+    color: white;
+}
+
+.table_id {
+    font-family: 'Plus Jakarta Sans' ;
+    color: white;
+    background: #cb61008a !important;
+    padding: 10px 16px !important;
+    border-radius: 31px !important;
+}
+
+
+@media only screen and (max-width: 1199px) {
+    img.greenBg2 {
+        min-height: 765px;
+      }
+}
+
+@media only screen and (max-width: 991px) {
+    img.greenBg2 {
+        min-height: 725px;
+    }
+
+    .forsage_title2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 640px){
+img.greenBg2 {
+    min-height: 868px;
+}
+}
+
+@media only screen and (max-width: 480px){
+.card_chain2 h3 {
+    margin: 6px 4px !important;
+    width: 71px;
+    height: 68px;
+    font-size: 12px;
+    padding-top: 28px;
+}
+
+.forsgae_level_card {
+    padding: 8px 4px;
+}
+
+.cycle_name {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+
+.cycle_name_left {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+
+
+}
+
+
+@media only screen and (max-width: 1199px) {
+    .forsage_prive_center_btn {
+        width: 100%;
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .center_contant_forsage {
+        width: 64%;
+    }
+    .circle_preview_5_left {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+
+@media only screen and (max-width: 991px) {
+    .previews_btn_forsage button {
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    
+
+    .circle_preview_5_left {
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+    }
+/* 
+    .circle_priveiw h4 {
+        padding: 21px 9px;
+        width: 54px;
+        height: 54px;
+        font-size: 11px;
+        margin: 14px;
+    } */
+
+    .cycle_name {
+        width: 100%;
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Total_revenue {
+        margin-top: 20px;
+    }
+
+    .forsage_title2 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .forsage_title2 {
+        margin-top: 90px;
+    }
+    .circle_preview_5_left {
+        width: 1440px;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .previews_btn_forsage button {
+        padding: 11px;
+        font-size: 14px;
+        min-width: 80px;
+    }
+}
+
+@media only screen and (max-width: 641px){
+    .previews_btn_forsage button {
+        padding: 5px;
+        font-size: 14px;
+        min-width: 64px;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .forsage_prive_center_btn {
+        width: 100%;
+        display: flex;
+        margin-top: 20px;
+        flex-direction: column-reverse;
+        align-items: baseline;
+    }
+
+
+    .circle_priveiw h4 {
+        padding: 28px 10px;
+        background: white;
+        width: 121px;
+        height: 83px;
+        border-radius: 50%;
+        text-align: center;
+        color: black;
+        margin: 14px;
+    }
+
+    .previews_btn_forsage button {
+        padding: 5px;
+        font-size: 14px;
+        width: 100%;
+        min-height: 30px;
+        margin-bottom: 11px;
+        margin-top: 10px;
+    }
+
+    .previews_btn_forsage {
+        width: 100%;
+    }
+    .center_contant_forsage {
+        width: 100%;
+    }
+
+    .Total_revenue h1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12;
+    }
+
+    .Total_revenue {
+        margin-top: 5px;
+    }
+
+    .partners {
+        margin-right: 0;
+        margin-top: 15px;
+    }
+
+    .all_slot h5 {
+        font-size: 13px;
+        padding: 10px;
+       
+        margin: 0;
+        margin-right: 13px;
+    }
+}
+.upline_arrow{
+    width: 36px;
+    background: transparent !important;
+    padding: 0px !important;
+    border-radius: 50px;
+}

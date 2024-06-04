@@ -1,0 +1,349 @@
+ <div className="regi_main">
+      {/* {isModalOpen && (
+        <div className="popupmainbuy">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 className="text-center modal-content-section">
+                Stake tokens to activate your current purchase plan
+              </h3>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body text-center">
+
+            {StakeLoading ? <button
+               onClick={() => {
+              stakeMjcTokens();
+              getMainUserId(address);}} 
+                type="button"
+                class="btn btn-primary center mx-auto modal-button"
+                data-dismiss="modal"
+              >
+               Loading...
+              </button> 
+                        :  <button
+               onClick={() => {
+              stakeMjcTokens();
+              getMainUserId(address);}} 
+                type="button"
+                class="btn btn-primary center mx-auto modal-button"
+                data-dismiss="modal"
+              >
+                Stake Tokens
+              </button>
+            
+            
+            }
+           
+            </div>
+          </div>
+        </div>
+      )} */}
+      <div style={{ zIndex: 99999999 }}>
+        <ToastContainer />
+      </div>
+
+      {/* <img src={blueflase} className="bludeflasereg" alt="blueflase" /> */}
+      <div className={`container ${isModalOpen ? "opacitylow" : ""}`}>
+        <div className="main_top_logo">
+          <div className="logos_landing">
+            <span>
+              <img src={logo} alt="logos" className="logolanding" />
+            </span>
+          </div>
+
+          <div className="smart_chains">
+            <div className="smart_chain_1">
+              <span>
+                <img
+                  src={icon1}
+                  alt="smart_chain"
+                  className="smart_chain_icon"
+                />
+              </span>
+              <p>Smart Chain</p>
+            </div>
+
+            <div className="connect_btn">
+              <button>
+                <Link to="/">Back </Link>
+              </button>
+            </div>
+          </div>
+        </div>
+        {ApproveTokensloading && <Loading />}
+        {BuyTokenLoading && <Loading />}
+        {directStakeJoiningLoading && <Loading />}
+        {StakeLoading && <Loading />}
+        <div className="registion_from">
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="regis_left">
+                <h2>
+                  Registration On <br></br> MJC Platform
+                </h2>
+
+                <div className="input_upline">
+                  <h5>Your Referral Address</h5>
+                  <input
+                    type="text"
+                    className="you_pline_input"
+                    value={referralCode}
+                    onChange={handleReferralChange}
+                  />
+                  {/* <div className="wllet_condition">
+                    <p>
+                      <button onClick={() => handleTabClick("home")}>
+                        <span className="check_icon">
+                          <i
+                            className={`fa fa-check ${
+                              activeTab === "home" ? "activeTabText" : ""
+                            }`}
+                            aria-hidden="true"
+                          ></i>
+                        </span>
+                        <span
+                          className={`tabText ${
+                            activeTab === "home" ? "activeTabText" : ""
+                          }`}
+                        >
+                          Buy Tokens
+                        </span>
+                      </button>
+                     
+                    </p>
+                    <p>
+                      <button onClick={() => handleTabClick("menu1")}>
+                        <span className="check_icon">
+                          <i
+                            className={`fa fa-check ${
+                              activeTab === "menu1" ? "activeTabText" : ""
+                            }`}
+                            aria-hidden="true"
+                          ></i>
+                        </span>
+                        <span
+                          className={`tabText ${
+                            activeTab === "menu1" ? "activeTabText" : ""
+                          }`}
+                        >
+                          Direct Staking
+                        </span>
+                      </button>
+                    </p>
+                    <p>
+                      <button onClick={() => handleTabClick("menu2")}>
+                        <span className="check_icon">
+                          <i
+                            className={`fa fa-check ${
+                              activeTab === "menu2" ? "activeTabText" : ""
+                            }`}
+                            aria-hidden="true"
+                          ></i>
+                        </span>
+                        <span
+                          className={`tabText ${
+                            activeTab === "menu2" ? "activeTabText" : ""
+                          }`}
+                        >
+                          MJC Stake Joining
+                        </span>
+                      </button>
+                    </p>
+                  </div> */}
+
+                  <div className="chech_agin_btn">
+                    <button onClick={() => handleUserWallet()}>
+                      Fill Parent
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-lg-6">
+              <div
+                className="regis_right"
+                style={{
+                  backgroundImage: `url(${plashtfiny})`,
+                  backgroundSize: "cover",
+                }}
+              >
+                <div className="top_section_reg">
+                  <div className="spending">
+                    <p>Enter spending</p>
+                    <input
+                      type="number"
+                      className="buy_mjc_input"
+                      value={spending}
+                      onChange={handleSpendingChange}
+                    />
+
+                    <button onClick={approveTokens} className="buy_button_MJC">
+                      Approve USDT to spend
+                    </button>
+                  </div>
+                  <div className="tab-content">
+                    <div
+                      id="home"
+                      className={`container tab-pane ${
+                        activeTab === "home" ? "active" : "fade"
+                      }`}
+                    >
+                      <div className="buy_token_card">
+                        <h1>Buy USDT Plan</h1>
+
+                        <form onSubmit={onFormSubmit}>
+                          <div className="buy_mjc_one_input">
+                            <p>Enter referrer wallet address</p>
+                            <input
+                              required
+                              type="text"
+                              className="buy_mjc_input"
+                              value={referralCode}
+                              onChange={handleReferralChange}
+                            />
+                          </div>
+                          <div className="buy_mjc_one_input">
+                            <p>Buy plan</p>
+                            <select
+                              id="Buy_plan_mjc"
+                              name="Buy_plan_mjc"
+                              value={selectedValue}
+                              onChange={handleSelectOption}
+                            >
+                              <option required value="">
+                                Select Your Plan
+                              </option>
+                              {/* <option value="0.1">0.1</option> */}
+
+                              {lockDetails50 == true ? 
+                                <option disabled value="50">50</option> :
+                                <option value="50">50</option>
+                               }
+
+                               {lockDetails100 == true ? 
+                                <option disabled value="100">100</option> :
+                                <option value="100">100</option>
+                               }
+                               {lockDetails200 == true ? 
+                                <option disabled value="200">200</option> :
+                                <option  value="200">200</option>
+                               }
+                               {lockDetails500 == true ? 
+                                <option disabled value="500">500</option> :
+                                <option  value="500">500</option>
+                               }
+                               {lockDetails1000 == true ? 
+                                <option disabled value="1000">1000</option> :
+                                <option  value="1000">1000</option>
+                               }
+                            </select>
+                          </div>
+                          {/* <p>You must have {result2} MJC Tokens</p> */}
+                          <Button
+                            onClick={()=>{buyToken(handleBuyPlan)}}
+                            type="submit"
+                            className="buy_button_MJC"
+                          >
+                            {" "}
+                            Purchase Plan
+                          </Button>
+                        </form>
+                      </div>
+                    </div>
+                    <div
+                      id="menu1"
+                      className={`container tab-pane ${
+                        activeTab === "menu1" ? "active" : "fade"
+                      }`}
+                    >
+                      <div className="buy_token_card">
+                        <h1>Direct Staking</h1>
+
+                        <div className="buy_mjc_one_input">
+                          <p>Enter referrer wallet address</p>
+                          <input
+                            onChange={handleStackReferral}
+                            value={stackReferral}
+                            type="text"
+                            className="buy_mjc_input"
+                          />
+                        </div>
+
+                        <div className="buy_mjc_one_input">
+                          <p>Enter amount</p>
+                          <input
+                            onChange={handleStackPrice}
+                            value={stackPrice}
+                            type="text"
+                            className="buy_mjc_input"
+                          />
+                        </div>
+
+                        <button
+                          onClick={DirectStakeJoinings}
+                          type="submit"
+                          className="buy_button_MJC"
+                        >
+                          {" "}
+                          Direct Stake
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      id="menu2"
+                      className={`container tab-pane ${
+                        activeTab === "menu2" ? "active" : "fade"
+                      }`}
+                    >
+                      <div className="buy_token_card">
+                        <h1>MJC Stake Joining</h1>
+
+                        <div className="buy_mjc_one_input">
+                          <p>Enter amount in $</p>
+                          <input
+                            value={mjcstackamount}
+                            onChange={handleMjcStackAmount}
+                            type="number"
+                            className="buy_mjc_input"
+                          />
+                          <p>$ worth MJCT : {mjcstackamountValue}</p>
+                        </div>
+
+                        <div className="buy_mjc_one_input">
+                          <p>Enter duration</p>
+                          <select
+                            value={mjcStackDuration}
+                            onChange={handleMjcStackDuration}
+                            id="Buy_plan_mjc"
+                            name="Buy_plan_mjc"
+                          >
+                            <option>Select Duration</option>
+                            <option value="90">90</option>
+                            <option value="180">180</option>
+                            <option value="360">360</option>
+                          </select>
+                        </div>
+
+                        <button
+                          onClick={stakeMjcTokens}
+                          className="buy_button_MJC"
+                        >
+                          Stake tokens
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

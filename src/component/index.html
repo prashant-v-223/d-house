@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register with Smart Contract</title>
+</head>
+<body>
+    <input type="text" id="amount" placeholder="Enter amount">
+    <button onclick="handleRegister()">Register</button>
+    <div id="status">Status: </div>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script>
+        const contractAddress = '0x16f16FaDb27f04bdb754F073AFDec59C3046a31E';
+        const abi = [
+            // Your contract's ABI
+            "function Register(uint256 amount) public returns (bool)"
+        ];
+
+        async function handleRegister() {
+            const amountInput = document.getElementById('amount');
+            const statusDiv = document.getElementById('status');
+            const amount = amountInput.value;
+
+            try {
+                // Check if MetaMask is installed
+                if (!window.ethereum) {
+                    statusDiv.textContent = 'Status: MetaMask is not installed';
+                    return;
+                }
+
+                // Request account access
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+                // Create a new Web3Provider
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+                // Get the signer
+                const signer = provider.getSigner();
+
+                // Create a contract instance
+                const contract = new ethers.Contract(contractAddress, abi, signer);
+
+                // Convert amount to a BigNumber
+                const amountInWei = ethers.utils.parseUnits(amount, 'ether');
+
+                // Call the Register function
+                const tx = await contract.Register(amountInWei);
+
+                // Wait for the transaction to be mined
+                await tx.wait();
+
+                statusDiv.textContent = 'Status: Transaction successful!';
+            } catch (error) {
+                console.error(error);
+                statusDiv.textContent = 'Status: Transaction failed!';
+            }
+        }
+    </script>
+</body>
+</html>
