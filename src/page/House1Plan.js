@@ -48,7 +48,7 @@ const House1Plan = () => {
   // Retrieve data from localStorage
 
   const { contract } = useContract(
-    "0x16f16FaDb27f04bdb754F073AFDec59C3046a31E"
+    "0xefbC742bce081ed4323eaD401af7C6304a91D286"
   );
   const { contract: USDTContract } = useContract(
     "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"

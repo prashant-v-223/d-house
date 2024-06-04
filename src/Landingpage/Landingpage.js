@@ -74,7 +74,7 @@ const Landingpage = () => {
     localStorage.setItem("UserID", event.target.value);
   };
   const { contract } = useContract(
-    "0x16f16FaDb27f04bdb754F073AFDec59C3046a31E"
+    "0xefbC742bce081ed4323eaD401af7C6304a91D286"
   );
 
 
