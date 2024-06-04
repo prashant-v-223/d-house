@@ -95,7 +95,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3100/plan/get-plan?userid=${main_user_id}`
+        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -137,7 +137,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:3100/user/get-user?wallet_id=${e}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${e}`
       );
 
       console.log(response.data.data);
@@ -164,7 +164,7 @@ const Dashboard = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-        `http://localhost:3100/user/get-user?wallet_id=${w}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${w}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -187,7 +187,7 @@ const Dashboard = () => {
   const profitDetailsApi = async (main_user_id) => {
     try {
       const response = await axios.get(
-        `http://localhost:3100/profit/total-profit?userId=${main_user_id}`
+        `https://dollerhouse111.onrender.com/profit/total-profit?userId=${main_user_id}`
       );
       setProfitDetails(response.data.data);
       localStorage.setItem("total", response.data.data.recentTeam || 0);
@@ -220,7 +220,7 @@ const Dashboard = () => {
     try {
       console.log(modifiedAddress);
       setLoading(true);
-      const response = await fetch("http://localhost:3100/plan/create", {
+      const response = await fetch("https://dollerhouse111.onrender.com/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -248,7 +248,7 @@ const Dashboard = () => {
   // const PostHouse5Plan = async (plan_price) => {
   //   setBuyTokenLoading(true)
   //   try {
-  //     const response = await fetch("http://localhost:3100/team/add", {
+  //     const response = await fetch("https://dollerhouse111.onrender.com/team/add", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -409,7 +409,7 @@ const Dashboard = () => {
   //     };
 
   //     const response = await axios.post(
-  //       "http://localhost:3100/profile/upload",
+  //       "https://dollerhouse111.onrender.com/profile/upload",
   //       requestBody,
   //       {
   //         headers: {
@@ -462,7 +462,7 @@ const Dashboard = () => {
   const GetPlanDetail = async (main_user_id) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/plan/get-plan?wallet_id=${main_user_id}`
+        `https://dollerhouse111.onrender.com/plan/get-plan?wallet_id=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -484,7 +484,7 @@ const Dashboard = () => {
   const fetchProfile = async (wallet) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/profile/get-profile?wallet_id=${wallet}`
+        `https://dollerhouse111.onrender.com/profile/get-profile?wallet_id=${wallet}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -518,7 +518,7 @@ const Dashboard = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:3100/profile/upload",
+        "https://dollerhouse111.onrender.com/profile/upload",
         requestBody,
         {
           headers: {
@@ -628,7 +628,7 @@ const Dashboard = () => {
   // useEffect(() => {
   // const fetchData24 = async () => {
   //   try {
-  //     const response = await fetch(`http://localhost:3100/user/user-details?wallet_id=${walletAddress}`);
+  //     const response = await fetch(`https://dollerhouse111.onrender.com/user/user-details?wallet_id=${walletAddress}`);
   //     if (!response.ok) {
   //       throw new Error('Network response was not ok');
   //     }

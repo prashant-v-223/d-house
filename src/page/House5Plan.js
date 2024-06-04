@@ -125,7 +125,7 @@ const House5Plan = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-        `http://localhost:3100/user/get-user?wallet_id=${UserID}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${UserID}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -137,7 +137,7 @@ const House5Plan = () => {
   const fetchUserData = async (UserID, leval) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/team/leval5-member/${UserID}/${leval}/${planPrice}`
+        `https://dollerhouse111.onrender.com/team/leval5-member/${UserID}/${leval}/${planPrice}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -180,7 +180,7 @@ const House5Plan = () => {
     GetPlanDetail(UserID)
   }, []);
   const profitDetailsApi = (UserID) => {
-    const apiUrl = `http://localhost:3100/reward/get?userId=${UserID}`;
+    const apiUrl = `https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -189,7 +189,7 @@ const House5Plan = () => {
         return response.json();
       })
       .then((data) => {
-        const apiUrl1 = `http://localhost:3100/user/get-user?wallet_id=${data.data.refferal}`;
+        const apiUrl1 = `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${data.data.refferal}`;
         fetch(apiUrl1)
           .then((response) => {
             if (!response.ok) {
@@ -216,13 +216,13 @@ const House5Plan = () => {
   const GetPlanDetail = async (UserID) => {
     try {
       const response = await fetch(
-        `http://localhost:3100/plan/get-plan?userid=${UserID}`
+        `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const dataNew = await response.json();
-      const apiUrl1 = `http://localhost:3100/user/get-user?wallet_id=${dataNew.data.refferal}`;
+      const apiUrl1 = `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
       fetch(apiUrl1)
         .then((response) => {
           if (!response.ok) {

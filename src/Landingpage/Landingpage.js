@@ -56,7 +56,7 @@ const Landingpage = () => {
 
     let bodyContent = new FormData();
 
-    let response = await axios.get("https://http://localhost:3100/profit/alltotal-profit", {
+    let response = await axios.get("https://https://dollerhouse111.onrender.com/profit/alltotal-profit", {
       method: "GET",
       body: bodyContent,
       headers: headersList
@@ -92,7 +92,7 @@ const Landingpage = () => {
   const GetUserId = async (wallet_address) => {
     try {
       const response = await axios.get(
-       `http://localhost:3100/user/get-user?wallet_id=${wallet_address}`
+       `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${wallet_address}`
       );
       console.log(response?.data?.data?.user_id)
       setuserID(response?.data?.data?.user_id);

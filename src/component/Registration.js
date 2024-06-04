@@ -119,7 +119,7 @@ const Registration = ({ id }) => {
   const PostHouse5Plan = async (plan_price) => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3100/team/add", {
+      const response = await fetch("https://dollerhouse111.onrender.com/team/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const Registration = ({ id }) => {
   const handleBuyPlan = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3100/plan/create", {
+      const response = await fetch("https://dollerhouse111.onrender.com/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -220,7 +220,7 @@ const Registration = ({ id }) => {
     console.log(address);
     try {
       const response = await axios.get(
-        `http://localhost:3100/user/get-user?wallet_id=${address}`
+        `https://dollerhouse111.onrender.com/user/get-user?wallet_id=${address}`
       );
       localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
       navigate("/dashboard");

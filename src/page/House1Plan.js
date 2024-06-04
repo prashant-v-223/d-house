@@ -191,7 +191,7 @@ const House1Plan = () => {
 
 
   const profitDetailsApi = (UserID) => {
-    const apiUrl =`http://localhost:3100/reward/get?userId=${UserID}`;
+    const apiUrl =`https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -217,13 +217,13 @@ const House1Plan = () => {
   const GetPlanDetail = async (UserID) => {
     try {
       const response = await fetch(
-       `http://localhost:3100/plan/get-plan?userid=${UserID}`
+       `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const dataNew = await response.json();
-      const apiUrl1 =`http://localhost:3100/user/get-user?wallet_id=${dataNew.data.refferal}`;
+      const apiUrl1 =`https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
       fetch(apiUrl1)
         .then((response) => {
           if (!response.ok) {
