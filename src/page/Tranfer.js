@@ -13,7 +13,7 @@ function Tranfer() {
     const profitDetailsApi = async (main_user_id) => {
         try {
             const response = await axios.get(
-               `https://dollerhouse111.onrender.com/profit/total-profit?userId=${main_user_id}`
+               `https://doller-production.up.railway.app/profit/total-profit?userId=${main_user_id}`
             );
             setProfitDetails(response.data.data.plan_buyeds);
             console.log("response.data", response.data.data);

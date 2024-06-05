@@ -158,7 +158,7 @@ const House15Plan = () => {
 
   const profitDetailsApi = async (UserID) => {
     try {
-      const apiUrl =`https://dollerhouse111.onrender.com/reward/get?userId=${UserID}`;
+      const apiUrl =`https://doller-production.up.railway.app/reward/get?userId=${UserID}`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -187,13 +187,13 @@ const House15Plan = () => {
   const GetPlanDetail = async (UserID) => {
     try {
       const response = await fetch(
-       `https://dollerhouse111.onrender.com/plan/get-plan?userid=${UserID}`
+       `https://doller-production.up.railway.app/plan/get-plan?userid=${UserID}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const dataNew = await response.json();
-      const apiUrl1 =`https://dollerhouse111.onrender.com/user/get-user?wallet_id=${dataNew.data.refferal}`;
+      const apiUrl1 =`https://doller-production.up.railway.app/user/get-user?wallet_id=${dataNew.data.refferal}`;
       fetch(apiUrl1)
         .then((response) => {
           if (!response.ok) {
