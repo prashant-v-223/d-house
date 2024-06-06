@@ -57,7 +57,7 @@ const SlotDetail = () => {
   // Retrieve data from localStorage
 
   const { contract } = useContract(
-    "0x2740D7d3ac78fA4DAD6c67cA6e02cbFb9104E2C9"
+    "0x0F1b1F82eEE342Fd18bC05792ec1F66D7a86CF8A"
   );
   const { contract: USDTContract } = useContract(
     "0x0ECBBF0D46E13cC4fffdf14AbC39D8332c89Ad8b"
