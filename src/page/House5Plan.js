@@ -260,12 +260,11 @@ const House5Plan = () => {
   // }, [house5Plan1])
   const sumtotal = (referBYArray) => {
     let sum = 0;
+    console.log("referBYArray", referBYArray[0]?.referBY);
     if (referBYArray) {
-      referBYArray?.forEach(item => {
-        if (item.status === "done") {
-          const parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0;
-          sum += 5 * parse / 100;
-        }
+      referBYArray[0]?.referBY?.forEach(item => {
+        let parse = item.depthleval + 1 === 1 ? 0 : item.depthleval + 1 === 2 ? 10 : item.depthleval + 1 === 3 ? 20 : item.depthleval + 1 === 4 ? 20 : item.depthleval + 1 === 5 ? 50 : 0
+        sum += planName2 * parse / 100;
       });
     }
     return sum
@@ -579,7 +578,7 @@ const House5Plan = () => {
                     <div className="Total_revenue">
                       <p>Total revenue</p>
                       <h1>
-                        {sumtotal(house5Plan2)}
+                        {sumtotal(house5Plan1)}
                         <span className="pl-3">
                           USDT
                         </span>
