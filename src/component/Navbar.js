@@ -12,7 +12,7 @@ import logo from "../image/logoMain.png";
 import iconnft from "../image/svg-image-11.svg"
 import { Button } from "rsuite";
 
-const Navbar = ({ actuvetab }) => {
+const Navbar = ({ actuvetab, handleSearch1 }) => {
   const storedData = localStorage.getItem("userData");
   const userDataLocal = JSON.parse(storedData);
   const userIDs = localStorage.getItem("userID");
@@ -160,7 +160,7 @@ const Navbar = ({ actuvetab }) => {
                   className="input_NUmber"
                   placeholder="Preview ID"
                 />
-                <button type="button" onClick={fetchData}>
+                <button type="button" onClick={() => { handleSearch1(previewID) }}>
                   Search
                 </button>
               </div>

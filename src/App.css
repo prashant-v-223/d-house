@@ -27,6 +27,12 @@
 .App-link {
   color: #61dafb;
 }
+.Toastify__toast-container--top-right {
+  z-index: 99999999 !important;
+}
+.pre_Id {
+  z-index: 99999999 !important;
+}
 
 @keyframes App-logo-spin {
   from {

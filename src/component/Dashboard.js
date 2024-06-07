@@ -602,7 +602,7 @@ const Dashboard = () => {
 
     setTotalInvestMent(sumOfAmounts);
   }, [planDetails]);
-  const handleSearch = () => {
+  const handleSearch = (previewID) => {
     profitDetailsApi(previewID);
     GetPlanDetail1(previewID);
     // fetchProfile(walletAddress);
@@ -694,7 +694,7 @@ const Dashboard = () => {
                       <button
                         type="button"
                         onClick={() => {
-                          handleSearch();
+                          handleSearch(previewID);
                         }}
                       >
                         Search
@@ -707,7 +707,11 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <Navbar actuvetab={"Dashboard"} />
+            <Navbar actuvetab={"Dashboard"} handleSearch1={(eaa) => {
+
+              console.log("eaaeaaeaaeaa", eaa);
+              handleSearch(eaa);
+            }} />
             <ToastContainer />
             <div className="content">
               <div className="container">

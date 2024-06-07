@@ -479,10 +479,10 @@ i.fa.fa-user-circle-o {
   align-items: flex-end;
   margin-bottom: 7px;
 }
-div[aria-labelledby="radix-:r4:"]{
+div[aria-labelledby="radix-:r4:"] {
   z-index: 99999999999 !important;
 }
-.id_user p {    
+.id_user p {
   color: white;
   font-family: "Plus Jakarta Sans" !important;
   font-size: 20px;
@@ -497,7 +497,7 @@ div[aria-labelledby="radix-:r4:"]{
   display: inline-block;
   margin-top: 40px;
 }
-div[role="dialog"]{
+div[role="dialog"] {
   z-index: 99999999 !important;
 }
 .personal_link {
@@ -1033,10 +1033,13 @@ a#tems {
 .question_icon:hover .infomation {
   display: block;
 }
+.Toastify__toast-container--top-right {
+  z-index: 99999999 !important;
+}
 .pre_Id {
   position: fixed;
   top: 11px;
-  z-index: 2;
+  z-index: 999999 !important;
   background-color: #0e0f10;
   color: white;
   width: 77.5%;
