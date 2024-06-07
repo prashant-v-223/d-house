@@ -226,9 +226,8 @@ const Dashboard = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          wallet_id: walletAddress,
-          refferalId: refferal,
-          amount: plan_price,
+          wallet_id: walletAddress?.toLowerCase(),
+          refferalId: refferal.toLowerCase(),
           plan_details: [
             {
               amount: plan_price,
