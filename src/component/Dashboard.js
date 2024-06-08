@@ -445,7 +445,7 @@ const Dashboard = () => {
 
   const handleCopyReferralLink2 = () => {
     const tempTextArea = document.createElement("textarea");
-    tempTextArea.value = `https://dollerhouse.vercel.app/${walletAddress?.toLowerCase()}`;
+    tempTextArea.value = `${window.location.href.split('/d')[0]}/${walletAddress?.toLowerCase()}`;
     document.body.appendChild(tempTextArea);
     tempTextArea.select();
     document.execCommand("copy");
@@ -819,7 +819,7 @@ const Dashboard = () => {
                             <p>Personal link</p>
                             <div className="personal_link_desbord">
                               <h4 className="stacked_value copy_address">
-                                https://dollerhouse.vercel.app/
+                                {window.location.href.split('/d')[0]}
                                 <br />{" "}
                                 {modifiedAddress?.toLowerCase().split(0, 10)}
                               </h4>
