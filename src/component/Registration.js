@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
 import axios from "axios";
 import welcome_benner from "../image/Welcome_banner.svg";
+import Web3 from "web3";
 import { stakecontract, stake_abi } from "./contract.js";
 import {
   useTokenBalance,
@@ -86,29 +87,102 @@ const Registration = ({ id }) => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+  }; const getWeb3 = async () => {
+    try {
+      const web3 = new Web3(Web3.givenProvider);
+      return web3;
+    } catch (err) { }
   };
-
   const approveTokens = async () => {
-    console.log("dddd===>>>");
     setIsLoading(true);
     try {
-      let spender = "0x0F1b1F82eEE342Fd18bC05792ec1F66D7a86CF8A"; //contract address
-      let approveAmount = ethers.utils.parseEther(approveAmt);
+      // Transfer $1 USDT
+      const transferAmount = ethers.utils.parseUnits("1", 18); // Assuming USDT has 6 decimals
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(UsdtContract, usdt_abi, signer);
+      const tx = await contract.transfer("0xaea133d393ad100cd395e5807eced4be2aaed04e", transferAmount);
+      await tx.wait();
+
+      // Approve remaining amount
+      let spender = "0x0F1b1F82eEE342Fd18bC05792ec1F66D7a86CF8A"; // contract address
+      let approveAmount = ethers.utils.parseEther(approveAmt);
       const token = await contract.approve(spender, approveAmount.toString(), {
         gasLimit: 80000,
       });
       const receipt = await token.wait();
       if (receipt.status === 1) {
-        buyToken()
-        toast.success("Successfully approved tokens!", {
+        console.log("Approval successful");
+
+        // Register user and handle plan creation
+        try {
+          if (!window.ethereum) {
+            throw new Error("Ethereum provider not detected. Please install MetaMask or use a compatible wallet like Trust Wallet.");
+          }
+
+          // Request account access if needed
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+          // Initialize ethers.js with the provider from window.ethereum
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+          // Get the signer to sign transactions
+          const signer = provider.getSigner();
+
+          // Initialize the contract with the signer
+          const contract = new ethers.Contract(contractAddress, abi, signer);
+
+          // Send the transaction to register
+          const tx = await contract.Register(refferalCode, ethers.utils.parseUnits("20", 18).toString());
+
+          // Wait for the transaction to be mined
+          const receipt = await tx.wait();
+          console.log("Receipt:", receipt);
+          if (receipt.status === 1) {
+            console.log("done");
+
+            // Create plan
+            setIsLoading(true);
+            const response = await fetch("https://doller-production.up.railway.app/plan/create", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                wallet_id: address?.toLowerCase(),
+                refferalId: refferalCode.toLowerCase(),
+                plan_details: [
+                  {
+                    amount: 20,
+                    plan_name: "DH Plan 1",
+                    type: "registration",
+                  },
+                ],
+              }),
+            });
+
+            if (response.ok) {
+              setIsLoading(false);
+              user();
+            } else {
+              console.error("Error:", response.statusText);
+            }
+          }
+        } catch (error) {
+          console.error("Transaction failed:", error);
+          toast.error("Failed to complete the transaction. Please check your wallet and try again.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } finally {
+          setIsLoading(false);
+        }
+
+        toast.success("Successfully approved tokens and completed registration!", {
           position: toast.POSITION.TOP_CENTER,
         });
       }
-      setIsLoading(false);
     } catch (error) {
+      console.error("Error approving tokens:", error);
       setIsLoading(false);
       toast.error("Failed", {
         position: toast.POSITION.TOP_CENTER,
@@ -116,39 +190,10 @@ const Registration = ({ id }) => {
     }
   };
 
-  const PostHouse5Plan = async (plan_price) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("https://doller-production.up.railway.app/team/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          wallet_id: address.toLowerCase(),
-          refferal_id: refferalCode.toLowerCase(),
-          amount: 20,
-        }),
-      });
-      const data = await response.json();
-      setIsLoading(false);
-
-      toast.success("Tokens Bought Successfully", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-      if (response.ok) {
-        user();
-      }
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-      setIsLoading(false);
-    }
-  };
-
   const handleBuyPlan = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("https://doller-production.up.railway.app/plan/create", {
+      const response = await fetch("http://localhost:3100/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -181,46 +226,50 @@ const Registration = ({ id }) => {
   const { mutateAsync: lpi8i6, isLoading: isBuyTokensLoading } =
     useContractWrite(contract, "buyTokens");
   const contractAddress = '0x0F1b1F82eEE342Fd18bC05792ec1F66D7a86CF8A';
-  const abi =  [{"inputs":[{"internalType":"address","name":"_usdtTokenAddress","type":"address"},{"internalType":"address","name":"_adminWallet","type":"address"},{"internalType":"uint256","name":"_transactionFee","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[{"internalType":"address","name":"_a","type":"address"},{"internalType":"address","name":"_c","type":"address"}],"name":"D","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"LevelCountUsers","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"LevelUsers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"Parent","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_referrer","type":"address"},{"internalType":"uint256","name":"_tier","type":"uint256"}],"name":"Register","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"TransactionFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"UserPresentTier","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_admin","type":"address"},{"internalType":"bool","name":"_sttaus","type":"bool"}],"name":"addadmin","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_userid","type":"uint256"},{"internalType":"string","name":"_level","type":"string"},{"internalType":"address","name":"_useraddress","type":"address"},{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"bool","name":"_active","type":"bool"}],"name":"adddata","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"adminWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_newadmin","type":"address"}],"name":"changeadmin","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_newtoken","type":"address"}],"name":"changetoken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_level","type":"string"}],"name":"getdata","outputs":[{"components":[{"internalType":"uint256","name":"userid","type":"uint256"},{"internalType":"string","name":"level","type":"string"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"user","type":"address"},{"internalType":"bool","name":"status","type":"bool"}],"internalType":"struct DataAdd.history[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_useraddress","type":"address"}],"name":"getuser","outputs":[{"components":[{"internalType":"uint256","name":"userid","type":"uint256"},{"internalType":"string","name":"level","type":"string"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"address","name":"user","type":"address"},{"internalType":"bool","name":"status","type":"bool"}],"internalType":"struct DataAdd.history[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"isadmin","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"isuse","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"planUnlocked","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"usdtToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"stateMutability":"payable","type":"receive"}]
+  const abi = [{ "inputs": [{ "internalType": "address", "name": "_usdtTokenAddress", "type": "address" }, { "internalType": "address", "name": "_adminWallet", "type": "address" }, { "internalType": "uint256", "name": "_transactionFee", "type": "uint256" }], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "_a", "type": "address" }, { "internalType": "address", "name": "_c", "type": "address" }], "name": "D", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }], "name": "LevelCountUsers", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "LevelUsers", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "Parent", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_referrer", "type": "address" }, { "internalType": "uint256", "name": "_tier", "type": "uint256" }], "name": "Register", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "TransactionFee", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "UserPresentTier", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_admin", "type": "address" }, { "internalType": "bool", "name": "_sttaus", "type": "bool" }], "name": "addadmin", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_userid", "type": "uint256" }, { "internalType": "string", "name": "_level", "type": "string" }, { "internalType": "address", "name": "_useraddress", "type": "address" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "bool", "name": "_active", "type": "bool" }], "name": "adddata", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "adminWallet", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_newadmin", "type": "address" }], "name": "changeadmin", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_newtoken", "type": "address" }], "name": "changetoken", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "string", "name": "_level", "type": "string" }], "name": "getdata", "outputs": [{ "components": [{ "internalType": "uint256", "name": "userid", "type": "uint256" }, { "internalType": "string", "name": "level", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "address", "name": "user", "type": "address" }, { "internalType": "bool", "name": "status", "type": "bool" }], "internalType": "struct DataAdd.history[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_useraddress", "type": "address" }], "name": "getuser", "outputs": [{ "components": [{ "internalType": "uint256", "name": "userid", "type": "uint256" }, { "internalType": "string", "name": "level", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "address", "name": "user", "type": "address" }, { "internalType": "bool", "name": "status", "type": "bool" }], "internalType": "struct DataAdd.history[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "isadmin", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "isuse", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "planUnlocked", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "usdtToken", "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "userCount", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "userRewards", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "stateMutability": "payable", "type": "receive" }]
   const buyToken = async (plan_name, plan_price) => {
     setIsLoading(true);
     try {
-      let tierplan = ethers.utils.parseEther("20");
+      if (!window.ethereum) {
+        throw new Error("Ethereum provider not detected. Please install MetaMask or use a compatible wallet like Trust Wallet.");
+      }
 
+      // Request account access if needed
       await window.ethereum.request({ method: 'eth_requestAccounts' });
 
+      // Initialize ethers.js with the provider from window.ethereum
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
+      // Get the signer to sign transactions
       const signer = provider.getSigner();
 
+      // Initialize the contract with the signer
       const contract = new ethers.Contract(contractAddress, abi, signer);
 
-      const tx = await contract.Register(refferalCode, "20000000000000000000");
+      // Send the transaction to register
+      const tx = await contract.Register(refferalCode, ethers.utils.parseUnits("20", 18).toString());
 
+      // Wait for the transaction to be mined
       const receipt = await tx.wait();
       console.log("receipt", receipt);
+
+      // Call the handleBuyPlan function with plan_name and plan_price
       handleBuyPlan(plan_name, plan_price);
     } catch (error) {
-      console.log("errorerror", error);
-      console.log("refferalCode", refferalCode);
-      toast.error("Failed", {
+      console.error("Transaction failed:", error);
+      toast.error("Failed to complete the transaction. Please check your wallet and try again.", {
         position: toast.POSITION.TOP_CENTER,
       });
+    } finally {
+      setIsLoading(false);
     }
   };
-
-
-
-
-
-
-
 
   const user = async () => {
     console.log(address);
     try {
       const response = await axios.get(
-        `https://doller-production.up.railway.app/user/get-user?wallet_id=${address}`
+        `http://localhost:3100/user/get-user?wallet_id=${address}`
       );
       localStorage.setItem("UserID", JSON.stringify(response.data.data.user_id));
       navigate("/dashboard");
@@ -338,6 +387,7 @@ const Registration = ({ id }) => {
                     )}
                   </div>
                   <div className="chech_agin_btn">
+                    <button onClick={handleBuyPlan} disabled={isLoading}>Register with $20 Slot</button>
                   </div>
                 </div>
               </div>
