@@ -16,11 +16,28 @@ const chainId = ChainId.BinanceSmartChainTestnet;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
-   <ThirdwebProvider
-      supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect()]}
-      activeChain={97}
-      clientId="05b562387d7b3a4ad7ab03cd69484bdf"
-    >
+ 
+<ThirdwebProvider
+  supportedWallets={[
+    createWallet("io.metamask"),
+    createWallet("com.coinbase.wallet"),
+    walletConnect(),
+    inAppWallet({
+      auth: {
+        options: [
+          "email",
+          "google",
+          "apple",
+          "facebook",
+          "phone",
+        ],
+      },
+    }),
+    createWallet("com.trustwallet.wallet"),
+  ]}
+  activeChain={56} // Binance Smart Chain mainnet chain ID
+  clientId="05b562387d7b3a4ad7ab03cd69484bdf"
+>
      <App />
     </ThirdwebProvider>
   </Router>
