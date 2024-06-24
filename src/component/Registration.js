@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
 import axios from "axios";
 import welcome_benner from "../image/Welcome_banner.svg";
-import Web3 from "web3";
 import { stakecontract, stake_abi } from "./contract.js";
 import {
   useTokenBalance,
