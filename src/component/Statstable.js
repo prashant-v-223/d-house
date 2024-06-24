@@ -22,7 +22,7 @@ const Statstable = () => {
   const user = async (profitDetailsApi) => {
     try {
       const response = await axios.get(
-       `https://doller-production.up.railway.app/user/get-user?wallet_id=${address}`
+       `https://doller-production-0ac2.up.railway.app/user/get-user?wallet_id=${address}`
       );
       setUser_id(response.data.data.user_id);
     } catch (err) {
@@ -32,7 +32,7 @@ const Statstable = () => {
   const navigate = useNavigate();
 
   const profitDetailsApi = (id) => {
-    const apiUrl =`https://doller-production.up.railway.app/reward/get?userId=${id}`;
+    const apiUrl =`https://doller-production-0ac2.up.railway.app/reward/get?userId=${id}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {

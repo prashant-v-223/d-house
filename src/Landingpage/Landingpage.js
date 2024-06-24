@@ -30,6 +30,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; import { useParams } from 'react-router-dom';
 
 import Registration from "../component/Registration";
+import ConnectButton from "../connectors/ConnectButton";
 const Landingpage = () => {
   const registrationRef = useRef(null); // Reference to the Registration component
   const wallet_address = useAddress()
@@ -56,7 +57,7 @@ const Landingpage = () => {
 
     let bodyContent = new FormData();
 
-    let response = await axios.get("https://https://doller-production.up.railway.app/profit/alltotal-profit", {
+    let response = await axios.get("https://https://doller-production-0ac2.up.railway.app/profit/alltotal-profit", {
       method: "GET",
       body: bodyContent,
       headers: headersList
@@ -92,7 +93,7 @@ const Landingpage = () => {
   const GetUserId = async (wallet_address) => {
     try {
       const response = await axios.get(
-       `https://doller-production.up.railway.app/user/get-user?wallet_id=${wallet_address}`
+       `https://doller-production-0ac2.up.railway.app/user/get-user?wallet_id=${wallet_address}`
       );
       console.log(response?.data?.data?.user_id)
       setuserID(response?.data?.data?.user_id);
@@ -202,6 +203,7 @@ const Landingpage = () => {
               <br />
               <div className="join_bth d-block m-auto mt-4">
                 <ConnectWallet className="d-block m-auto" />
+                <ConnectButton />
                 <br />
                 <button onClick={scrollToRegistration} className="wath_tut d-block m-auto">
                   Join Doller House

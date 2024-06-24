@@ -95,7 +95,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://doller-production.up.railway.app/plan/get-plan?userid=${main_user_id}`
+        `https://doller-production-0ac2.up.railway.app/plan/get-plan?userid=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -137,7 +137,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://doller-production.up.railway.app/user/get-user?wallet_id=${e}`
+        `https://doller-production-0ac2.up.railway.app/user/get-user?wallet_id=${e}`
       );
 
       console.log(response.data.data);
@@ -164,7 +164,7 @@ const Dashboard = () => {
   const user1 = async (w) => {
     try {
       const response = await axios.get(
-        `https://doller-production.up.railway.app/user/get-user?wallet_id=${w}`
+        `https://doller-production-0ac2.up.railway.app/user/get-user?wallet_id=${w}`
       );
 
       setUser_id1(response.data.data.user_id);
@@ -187,7 +187,7 @@ const Dashboard = () => {
   const profitDetailsApi = async (main_user_id) => {
     try {
       const response = await axios.get(
-        `https://doller-production.up.railway.app/profit/total-profit?userId=${main_user_id}`
+        `https://doller-production-0ac2.up.railway.app/profit/total-profit?userId=${main_user_id}`
       );
       setProfitDetails(response.data.data);
       localStorage.setItem("total", response.data.data.recentTeam || 0);
@@ -220,7 +220,7 @@ const Dashboard = () => {
     try {
       console.log(modifiedAddress);
       setLoading(true);
-      const response = await fetch("https://doller-production.up.railway.app/plan/create", {
+      const response = await fetch("https://doller-production-0ac2.up.railway.app/plan/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -247,7 +247,7 @@ const Dashboard = () => {
   // const PostHouse5Plan = async (plan_price) => {
   //   setBuyTokenLoading(true)
   //   try {
-  //     const response = await fetch("https://doller-production.up.railway.app/team/add", {
+  //     const response = await fetch("https://doller-production-0ac2.up.railway.app/team/add", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -275,62 +275,62 @@ const Dashboard = () => {
   const contractAddress = '0x0F1b1F82eEE342Fd18bC05792ec1F66D7a86CF8A';
   const abi = [{ "inputs": [{ "internalType": "address", "name": "_usdtTokenAddress", "type": "address" }, { "internalType": "address", "name": "_adminWallet", "type": "address" }, { "internalType": "uint256", "name": "_transactionFee", "type": "uint256" }], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "_a", "type": "address" }, { "internalType": "address", "name": "_c", "type": "address" }], "name": "D", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }], "name": "LevelCountUsers", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "address", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "LevelUsers", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "Parent", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_referrer", "type": "address" }, { "internalType": "uint256", "name": "_tier", "type": "uint256" }], "name": "Register", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "TransactionFee", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "UserPresentTier", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_admin", "type": "address" }, { "internalType": "bool", "name": "_sttaus", "type": "bool" }], "name": "addadmin", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_userid", "type": "uint256" }, { "internalType": "string", "name": "_level", "type": "string" }, { "internalType": "address", "name": "_useraddress", "type": "address" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "bool", "name": "_active", "type": "bool" }], "name": "adddata", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "adminWallet", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_newadmin", "type": "address" }], "name": "changeadmin", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_newtoken", "type": "address" }], "name": "changetoken", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "string", "name": "_level", "type": "string" }], "name": "getdata", "outputs": [{ "components": [{ "internalType": "uint256", "name": "userid", "type": "uint256" }, { "internalType": "string", "name": "level", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "address", "name": "user", "type": "address" }, { "internalType": "bool", "name": "status", "type": "bool" }], "internalType": "struct DataAdd.history[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_useraddress", "type": "address" }], "name": "getuser", "outputs": [{ "components": [{ "internalType": "uint256", "name": "userid", "type": "uint256" }, { "internalType": "string", "name": "level", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "address", "name": "user", "type": "address" }, { "internalType": "bool", "name": "status", "type": "bool" }], "internalType": "struct DataAdd.history[]", "name": "", "type": "tuple[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "isadmin", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "isuse", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "planUnlocked", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "usdtToken", "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "userCount", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "userRewards", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "stateMutability": "payable", "type": "receive" }]
   const approveTokens = async (plan_name, plan_price) => {
-    console.log("dddd===>>>", plan_price);
-    setBuyTokenLoading(true);
-    try {
-      let spender = "0x0F1b1F82eEE342Fd18bC05792ec1F66D7a86CF8A"; //contract address
-      let approveAmount = ethers.utils.parseEther(plan_price);
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(UsdtContract, usdt_abi, signer);
-      const token = await contract.approve(spender, approveAmount.toString(), {
-        gasLimit: 80000,
-      });
-      const receipt = await token.wait();
-      if (receipt.status === 1) {
-        buyToken(plan_name, plan_price)
-        toast.success("Successfully approved tokens!", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
-      setBuyTokenLoading(false);
-    } catch (error) {
-      setBuyTokenLoading(false);
-      toast.error("Failed", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    }
+    // console.log("dddd===>>>", plan_price);
+    // setBuyTokenLoading(true);
+    // try {
+    //   let spender = "0x0F1b1F82eEE342Fd18bC05792ec1F66D7a86CF8A"; //contract address
+    //   let approveAmount = ethers.utils.parseEther(plan_price);
+    //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+    //   const signer = provider.getSigner();
+    //   const contract = new ethers.Contract(UsdtContract, usdt_abi, signer);
+    //   const token = await contract.approve(spender, approveAmount.toString(), {
+    //     gasLimit: 80000,
+    //   });
+    //   const receipt = await token.wait();
+    //   if (receipt.status === 1) {
+    buyToken(plan_name, plan_price)
+    //     toast.success("Successfully approved tokens!", {
+    //       position: toast.POSITION.TOP_CENTER,
+    //     });
+    //   }
+    //   setBuyTokenLoading(false);
+    // } catch (error) {
+    //   setBuyTokenLoading(false);
+    //   toast.error("Failed", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    // }
   };
 
 
   const buyToken = async (plan_name, plan_price) => {
-    setBuyTokenLoading(true);
-    try {
-      console.log("refferal", refferal);
-      let tierplan = ethers.utils.parseEther("20");
+    // setBuyTokenLoading(true);
+    // try {
+    //   console.log("refferal", refferal);
+    //   let tierplan = ethers.utils.parseEther("20");
 
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+    //   await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+    //   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-      const signer = provider.getSigner();
+    //   const signer = provider.getSigner();
 
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      let num = Number(plan_price * 10 ** 18)
-      const tx = await contract.Register(refferal, num.toString());
-      console.log("num.toString()", num.toString());
-      const receipt = await tx.wait();
-      if (receipt.status === 1) {
-        handleBuyPlan(plan_name, plan_price);
-      }
-    } catch (error) {
-      console.log("errorerror", error);
-      console.log("refferalCode", ref);
-      toast.error("Failed", {
-        position: toast.POSITION.TOP_CENTER,
-      });
-    };
-    setBuyTokenLoading(false);
+    //   const contract = new ethers.Contract(contractAddress, abi, signer);
+    //   let num = Number(plan_price * 10 ** 18)
+    //   const tx = await contract.Register(refferal, num.toString());
+    //   console.log("num.toString()", num.toString());
+    //   const receipt = await tx.wait();
+    //   if (receipt.status === 1) {
+    handleBuyPlan(plan_name, plan_price);
+    //   }
+    // } catch (error) {
+    //   console.log("errorerror", error);
+    //   console.log("refferalCode", ref);
+    //   toast.error("Failed", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    // };
+    // setBuyTokenLoading(false);
     // try {
     //   const provider = new ethers.providers.Web3Provider(window.ethereum);
     //   const signer = provider.getSigner();
@@ -408,7 +408,7 @@ const Dashboard = () => {
   //     };
 
   //     const response = await axios.post(
-  //       "https://doller-production.up.railway.app/profile/upload",
+  //       "https://doller-production-0ac2.up.railway.app/profile/upload",
   //       requestBody,
   //       {
   //         headers: {
@@ -461,7 +461,7 @@ const Dashboard = () => {
   const GetPlanDetail = async (main_user_id) => {
     try {
       const response = await fetch(
-        `https://doller-production.up.railway.app/plan/get-plan?wallet_id=${main_user_id}`
+        `https://doller-production-0ac2.up.railway.app/plan/get-plan?wallet_id=${main_user_id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -483,7 +483,7 @@ const Dashboard = () => {
   const fetchProfile = async (wallet) => {
     try {
       const response = await fetch(
-        `https://doller-production.up.railway.app/profile/get-profile?wallet_id=${wallet}`
+        `https://doller-production-0ac2.up.railway.app/profile/get-profile?wallet_id=${wallet}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -517,7 +517,7 @@ const Dashboard = () => {
       };
 
       const response = await axios.post(
-        "https://doller-production.up.railway.app/profile/upload",
+        "https://doller-production-0ac2.up.railway.app/profile/upload",
         requestBody,
         {
           headers: {
@@ -627,7 +627,7 @@ const Dashboard = () => {
   // useEffect(() => {
   // const fetchData24 = async () => {
   //   try {
-  //     const response = await fetch(`https://doller-production.up.railway.app/user/user-details?wallet_id=${walletAddress}`);
+  //     const response = await fetch(`https://doller-production-0ac2.up.railway.app/user/user-details?wallet_id=${walletAddress}`);
   //     if (!response.ok) {
   //       throw new Error('Network response was not ok');
   //     }
